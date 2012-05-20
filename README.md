@@ -1,6 +1,24 @@
-# Rspec::Parameterized
+# RSpec::Parameterized
 
-TODO: Write a gem description
+Support simple parameterized test syntax in rspec.
+
+    describe "plus" do
+      where(:a, :b, :answer) do
+        [
+          [1 , 2 , 3],
+          [5 , 8 , 13],
+          [0 , 0 , 0]
+        ]
+      end
+    
+      with_them do
+        it "should do additions" do
+          (a + b).should == answer
+        end
+      end
+    end
+
+I was inspired by [udzura's mock](https://gist.github.com/1881139).
 
 ## Installation
 
@@ -18,7 +36,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Require `rspec-parameterized` from your `spec_helper.rb`.
+
+    require 'rspec-parameterized'
+
+Follow the sample spec above.
+
+Arguments given to `with_them` is directly passed to `describe`.  You can specify `:pending`, `:focus`, etc. here.
 
 ## Contributing
 

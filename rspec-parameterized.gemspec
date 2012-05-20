@@ -4,8 +4,9 @@ require File.expand_path('../lib/rspec/parameterized/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["tomykaira"]
   gem.email         = ["tomykaira@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{RSpec::Parameterized supports simple parameterized test syntax in rspec.}
+  gem.summary       = %q{RSpec::Parameterized supports simple parameterized test syntax in rspec.
+I was inspired by [udzura's mock](https://gist.github.com/1881139).}
   gem.homepage      = ""
 
   gem.add_dependency('rspec', '~>2.10.0')
