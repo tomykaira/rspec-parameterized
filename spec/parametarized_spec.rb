@@ -26,6 +26,12 @@ describe RSpec::Parameterized do
           (a + b).should == answer
         end
       end
+
+      with_them :pending do
+        it "should do additions" do
+          (a + b).should == answer
+        end
+      end
     end
   end
 end
