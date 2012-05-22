@@ -19,8 +19,7 @@ module RSpec
       #     end
       #
       def where(*args, &b)
-        @arg_names = args
-        @param_sets = b.call
+        set_parameters(args, b.call)
       end
 
       # Set parameters to be bound in specs under this example group.
@@ -35,8 +34,7 @@ module RSpec
       #     end
       #
       def where_table(*args, &b)
-        @arg_names = args
-        @param_sets = separate_table_like_block(b)
+        set_parameters(args, separate_table_like_block(b))
       end
 
       # Use parameters to execute the block.
@@ -49,20 +47,26 @@ module RSpec
       #       end
       #     end
       #
-      def with_them(*args, &block)
-        arg_names = @arg_names
-        @param_sets.each do |params|
-          describe(params.inspect, *args) do
-            [arg_names, params].transpose.each do |n|
-              let(n[0]) { n[1] }
-            end
-
-            module_eval(&block)
-          end
+      def with_them(*args, &b)
+        if @arg_names.nil? || @param_sets.nil?
+          @parameterized_pending_cases ||= []
+          @parameterized_pending_cases << [args, b]
+        else
+          define_cases(@arg_names, @param_sets, *args, &b)
         end
       end
 
       private
+      def set_parameters(arg_names, param_sets)
+        @arg_names = arg_names
+        @param_sets = param_sets
+        if @parameterized_pending_cases
+          @parameterized_pending_cases.each { |e|
+            define_cases(arg_names, param_sets, *e[0], &e[1])
+          }
+        end
+      end
+
       def separate_table_like_block(b)
         sexp = b.to_sexp(:strip_enclosure => true)
 
@@ -84,6 +88,18 @@ module RSpec
 
       def ruby2ruby
         @ruby2ruby ||= Ruby2Ruby.new
+      end
+
+      def define_cases(arg_names, param_sets, *args, &block)
+        param_sets.each do |params|
+          describe(params.inspect, *args) do
+            [arg_names, params].transpose.each do |n|
+              let(n[0]) { n[1] }
+            end
+
+            module_eval(&block)
+          end
+        end
       end
     end
   end

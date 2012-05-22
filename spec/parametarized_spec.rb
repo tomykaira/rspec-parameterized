@@ -46,4 +46,46 @@ describe RSpec::Parameterized do
       end
     end
   end
+
+  context "when the where block is after with_them" do
+    with_them do
+      it "should do additions" do
+        (a + b).should == answer
+      end
+    end
+
+    with_them do
+      subject { a }
+      it { should be_is_a Numeric }
+    end
+
+    where(:a, :b, :answer) do
+      [
+        [1 , 2 , 3],
+        [5 , 8 , 13],
+        [0 , 0 , 0]
+      ]
+    end
+  end
+
+  context "when the where block is between with_thems" do
+    with_them do
+      it "should do additions" do
+        (a + b).should == answer
+      end
+    end
+
+    where(:a, :b, :answer) do
+      [
+        [1 , 2 , 3],
+        [5 , 8 , 13],
+        [0 , 0 , 0]
+      ]
+    end
+
+    with_them do
+      subject { a }
+      it { should be_is_a Numeric }
+    end
+  end
 end
