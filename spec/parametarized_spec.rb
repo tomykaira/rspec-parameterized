@@ -33,5 +33,19 @@ describe RSpec::Parameterized do
         end
       end
     end
+
+    describe "separate with pipe" do
+      where_table(:a, :b, :answer) do
+        1         | 2         | 3
+        "hello "  | "world"   | "hello world"
+        [1, 2, 3] | [4, 5, 6] | [1, 2, 3, 4, 5, 6]
+      end
+
+      with_them do
+        it "a plus b is answer" do
+          (a + b).should == answer
+        end
+      end
+    end
   end
 end
