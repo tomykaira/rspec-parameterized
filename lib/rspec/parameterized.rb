@@ -27,7 +27,7 @@ module RSpec
       #
       # ## Example
       #
-      #     where(:a, :b, :answer) do
+      #     where_table(:a, :b, :answer) do
       #       1 | 2 | 3
       #       5 | 8 | 13
       #       0 | 0 | 0
