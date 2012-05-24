@@ -76,7 +76,12 @@ module RSpec
       def separate_table_like_block(b)
         sexp = b.to_sexp(:strip_enclosure => true)
 
-        lines = sexp.find_nodes(:call)
+        if sexp.sexp_type == :block
+          lines = sexp.find_nodes(:call)
+        else
+          lines = [sexp]
+        end
+
         lines.map do |l|
           rev_insts = []
           while l.sexp_type == :call and l[2] == :|

@@ -118,4 +118,16 @@ describe RSpec::Parameterized do
       end
     end
   end
+
+  context "when the table has only a row" do
+    where_table(:a, :b, :answer) do
+      1         | 2         | 3
+    end
+
+    with_them do
+      it "a plus b is answer" do
+        (a + b).should == answer
+      end
+    end
+  end
 end
