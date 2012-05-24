@@ -106,4 +106,16 @@ describe RSpec::Parameterized do
       it { should be_is_a Numeric }
     end
   end
+
+  context "when the where has only one parameter to be set" do
+    where(:x) do
+      [1, 2, 3]
+    end
+
+    with_them do
+      it 'can take an array of elements' do
+        x.should == x
+      end
+    end
+  end
 end

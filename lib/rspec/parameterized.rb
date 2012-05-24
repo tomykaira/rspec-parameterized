@@ -59,7 +59,13 @@ module RSpec
       private
       def set_parameters(arg_names, param_sets)
         @arg_names = arg_names
-        @param_sets = param_sets
+
+        @param_sets = if arg_names.count == 1 && !param_sets[0].is_a?(Array)
+                        param_sets.map { |x| Array[x] }
+                      else
+                        param_sets
+                      end
+
         if @parameterized_pending_cases
           @parameterized_pending_cases.each { |e|
             define_cases(arg_names, param_sets, *e[0], &e[1])
