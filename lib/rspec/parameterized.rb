@@ -92,9 +92,10 @@ module RSpec
 
       def define_cases(arg_names, param_sets, *args, &block)
         param_sets.each do |params|
-          pretty_params = [arg_names, params].transpose.map {|t| "#{t[0]}: #{params_inspect(t[1])}"}.join(", ")
+          pairs = [arg_names, params].transpose
+          pretty_params = pairs.map {|t| "#{t[0]}: #{params_inspect(t[1])}"}.join(", ")
           describe(pretty_params, *args) do
-            [arg_names, params].transpose.each do |n|
+            pairs.each do |n|
               let(n[0]) { n[1] }
             end
 
@@ -105,9 +106,8 @@ module RSpec
 
       def params_inspect(obj)
         begin
-          obj.class == Proc ? obj.to_raw_source : obj.inspect
+          obj.is_a?(Proc) ? obj.to_raw_source : obj.inspect
         rescue Sourcify::NoMatchingProcError
-          puts "Don't use ->(x) {} format."
           return obj.inspect
         end
       end
