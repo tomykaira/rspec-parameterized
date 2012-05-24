@@ -33,6 +33,24 @@ describe RSpec::Parameterized do
     end
   end
 
+  describe "lambda parameter" do
+    where(:a, :b, :answer) do
+      [
+        [1 , 2 , -> {should == 3}],
+        [5 , 8 , -> {should == 13}],
+        [0 , 0 , -> {should == 0}]
+      ]
+    end
+
+    with_them do
+      subject {a + b}
+      it "should do additions" do
+        self.instance_exec(&answer)
+      end
+    end
+  end
+
+
   describe "table separated with pipe" do
     where_table(:a, :b, :answer) do
       1         | 2         | 3
