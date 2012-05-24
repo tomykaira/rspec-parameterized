@@ -92,8 +92,8 @@ module RSpec
 
       def define_cases(arg_names, param_sets, *args, &block)
         param_sets.each do |params|
-          pretty_params = [arg_names, params].transpose.inject({}) {|h, t| h.merge!(t[0] => inspect_proc(t[1]))}
-          describe(pretty_params.inspect, *args) do
+          pretty_params = [arg_names, params].transpose.map {|t| "#{t[0]}: #{params_inspect(t[1])}"}.join(", ")
+          describe(pretty_params, *args) do
             [arg_names, params].transpose.each do |n|
               let(n[0]) { n[1] }
             end
@@ -103,8 +103,8 @@ module RSpec
         end
       end
 
-      def inspect_proc(obj)
-        obj.class == Proc ? obj.to_source : obj
+      def params_inspect(obj)
+        obj.class == Proc ? obj.to_raw_source : obj
       end
     end
   end
