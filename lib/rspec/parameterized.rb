@@ -104,7 +104,12 @@ module RSpec
       end
 
       def params_inspect(obj)
-        obj.class == Proc ? obj.to_raw_source : obj
+        begin
+          obj.class == Proc ? obj.to_raw_source : obj.inspect
+        rescue Sourcify::NoMatchingProcError
+          puts "Don't use ->(x) {} format."
+          return obj.inspect
+        end
       end
     end
   end
