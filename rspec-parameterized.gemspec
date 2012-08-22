@@ -10,9 +10,8 @@ I was inspired by [udzura's mock](https://gist.github.com/1881139).}
   gem.homepage      = ""
 
   gem.add_dependency('rspec', '~>2.11.0')
-  gem.add_dependency('sourcify', '~> 0.6.0.rc1')
+  gem.add_dependency('sourcify', '~> 0.6.0.rc2')
   gem.add_dependency('ruby2ruby', '~> 1.3.1')
-  gem.add_dependency('sexp_processor', '~> 3.2.0')
   gem.add_development_dependency('rake')
 
   gem.files         = `git ls-files`.split($\)
