@@ -11,6 +11,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 #         should do additions
 
 describe RSpec::Parameterized do
+  let(:hoge) {2}
   describe "where and with_them" do
     where(:a, :b, :answer) do
       [
@@ -127,6 +128,55 @@ describe RSpec::Parameterized do
     with_them do
       it "a plus b is answer" do
         (a + b).should == answer
+      end
+    end
+  end
+
+  context "when the where has let variables, defined by parent example group" do
+    describe "parent (define let)" do
+      let(:five) { 5 }
+      let(:eight) { 8 }
+
+      describe "child 1" do
+        where(:a, :b, :answer) do
+          [
+            [1 , 2 , 3],
+            [five , eight , 13],
+          ]
+        end
+
+        with_them do
+          it "a plus b is answer" do
+            (a + b).should == answer
+          end
+        end
+      end
+
+      describe "child 2 (where_table)" do
+        where_table(:a, :b, :answer) do
+          1         | 2         | 3
+          five      | eight     | 13
+        end
+
+        with_them do
+          it "a plus b is answer" do
+            (a + b).should == answer
+          end
+        end
+      end
+
+      let(:eq_matcher) { eq(13) }
+      describe "child 3 (use matcher)" do
+        where_table(:a, :b, :answer) do
+          1         | 2         | eq(3)
+          five      | eight     | eq_matcher
+        end
+
+        with_them do
+          it "a plus b is answer" do
+            (a + b).should answer
+          end
+        end
       end
     end
   end
