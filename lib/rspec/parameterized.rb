@@ -6,6 +6,15 @@ module RSpec
   module Parameterized
     module ExampleGroupMethods
 
+      # capsulize parameter attributes
+      class Parameter
+        attr_reader :arg_names, :table_format, :block
+
+        def initialize(arg_names, table_format, &block)
+          @arg_names, @table_format, @block = arg_names, table_format, block
+        end
+      end
+
       # Set parameters to be bound in specs under this example group.
       #
       # ## Example
@@ -19,7 +28,7 @@ module RSpec
       #     end
       #
       def where(*args, &b)
-        set_parameters(args, b.call)
+        set_parameters(args, false, &b)
       end
 
       # Set parameters to be bound in specs under this example group.
@@ -34,7 +43,7 @@ module RSpec
       #     end
       #
       def where_table(*args, &b)
-        set_parameters(args, separate_table_like_block(b))
+        set_parameters(args, true, &b)
       end
 
       # Use parameters to execute the block.
@@ -48,27 +57,21 @@ module RSpec
       #     end
       #
       def with_them(*args, &b)
-        if @arg_names.nil? || @param_sets.nil?
+        if @parameter.nil?
           @parameterized_pending_cases ||= []
           @parameterized_pending_cases << [args, b]
         else
-          define_cases(@arg_names, @param_sets, *args, &b)
+          define_cases(@parameter, *args, &b)
         end
       end
 
       private
-      def set_parameters(arg_names, param_sets)
-        @arg_names = arg_names
-
-        @param_sets = if arg_names.count == 1 && !param_sets[0].is_a?(Array)
-                        param_sets.map { |x| Array[x] }
-                      else
-                        param_sets
-                      end
+      def set_parameters(arg_names, table_format, &b)
+        @parameter = Parameter.new(arg_names, table_format, &b)
 
         if @parameterized_pending_cases
           @parameterized_pending_cases.each { |e|
-            define_cases(arg_names, param_sets, *e[0], &e[1])
+            define_cases(@parameter, *e[0], &e[1])
           }
         end
       end
@@ -94,16 +97,28 @@ module RSpec
       end
 
       def eval_sexp(sexp)
-        self.instance_eval(ruby2ruby.process(sexp))
+        instance = new  # for evaluate let methods.
+        instance.instance_eval(ruby2ruby.process(sexp))
       end
 
       def ruby2ruby
         @ruby2ruby ||= Ruby2Ruby.new
       end
 
-      def define_cases(arg_names, param_sets, *args, &block)
+      def define_cases(parameter, *args, &block)
+        instance = new  # for evaluate let methods.
+
+        if parameter.table_format
+          param_sets = separate_table_like_block(parameter.block)
+        else
+          param_sets = instance.instance_eval(&parameter.block)
+        end
+
+        # for only one parameters
+        param_sets = param_sets.map { |x| Array[x] } if !param_sets[0].is_a?(Array)
+
         param_sets.each do |params|
-          pairs = [arg_names, params].transpose
+          pairs = [parameter.arg_names, params].transpose
           pretty_params = pairs.map {|t| "#{t[0]}: #{params_inspect(t[1])}"}.join(", ")
           describe(pretty_params, *args) do
             pairs.each do |n|
