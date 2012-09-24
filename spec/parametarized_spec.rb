@@ -11,7 +11,6 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 #         should do additions
 
 describe RSpec::Parameterized do
-  let(:hoge) {2}
   describe "where and with_them" do
     where(:a, :b, :answer) do
       [
