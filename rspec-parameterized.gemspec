@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 I was inspired by [udzura's mock](https://gist.github.com/1881139).}
   gem.homepage      = ""
 
-  gem.add_dependency('rspec', '~> 2.14')
+  gem.add_dependency('rspec', '~> 2.13')
   gem.add_dependency('sourcify', '~> 0.6.0.rc2')
   gem.add_dependency('ruby2ruby')
   gem.add_development_dependency('rake')
