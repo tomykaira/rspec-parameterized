@@ -98,6 +98,9 @@ module RSpec
 
       def eval_sexp(sexp)
         instance = new  # for evaluate let methods.
+        if defined?(self.superclass::LetDefinitions)
+          instance.extend self.superclass::LetDefinitions
+        end
         instance.instance_eval(ruby2ruby.process(sexp))
       end
 
@@ -107,6 +110,9 @@ module RSpec
 
       def define_cases(parameter, *args, &block)
         instance = new  # for evaluate let methods.
+        if defined?(self.superclass::LetDefinitions)
+          instance.extend self.superclass::LetDefinitions
+        end
 
         if parameter.table_format
           param_sets = separate_table_like_block(parameter.block)
