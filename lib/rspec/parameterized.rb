@@ -1,6 +1,6 @@
 require "rspec/parameterized/version"
-require 'ruby2ruby'
 require 'sourcify'
+require 'ruby2ruby'
 
 module RSpec
   module Parameterized
