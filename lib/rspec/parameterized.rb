@@ -1,5 +1,4 @@
 require "rspec/parameterized/version"
-require 'ast'
 require 'parser'
 require 'unparser'
 require 'proc_to_ast'
