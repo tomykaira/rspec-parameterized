@@ -1,6 +1,7 @@
 require "rspec/parameterized/version"
-require 'sourcify'
-require 'ruby2ruby'
+require 'parser'
+require 'unparser'
+require 'proc_to_ast'
 
 module RSpec
   module Parameterized
@@ -77,31 +78,43 @@ module RSpec
       end
 
       def separate_table_like_block(b)
-        sexp = b.to_sexp(:strip_enclosure => true)
-
-        if sexp.sexp_type == :block
-          lines = sexp.find_nodes(:call)
+        ast = b.to_ast
+        inner_ast = ast.children[2]
+        if inner_ast.type == :send
+          lines = [inner_ast]
         else
-          lines = [sexp]
+          lines = inner_ast.children
         end
 
-        lines.map do |l|
-          rev_insts = []
-          while l.sexp_type == :call and l[2] == :|
-            rev_insts << eval_sexp(l[3][1])
-            l = l[1]
+        lines.map do |node|
+          if node.type == :send
+            buf = []
+            extract_value(node, buf)
+            buf.reverse
           end
-          rev_insts << eval_sexp(l)
-          rev_insts.reverse
         end
       end
 
-      def eval_sexp(sexp)
+      def extract_value(node, buf)
+        receiver, method, arg = node.children
+
+        if method == :|
+          buf << eval_source_fragment(Unparser.unparse(arg))
+        end
+
+        if receiver.is_a?(AST::Node) && receiver.type == :send && receiver.children[1] == :|
+          extract_value(receiver, buf)
+        else
+          buf << eval_source_fragment(Unparser.unparse(receiver))
+        end
+      end
+
+      def eval_source_fragment(source_fragment)
         instance = new  # for evaluate let methods.
         if defined?(self.superclass::LetDefinitions)
           instance.extend self.superclass::LetDefinitions
         end
-        instance.instance_eval(ruby2ruby.process(sexp))
+        instance.instance_eval(source_fragment)
       end
 
       def ruby2ruby
@@ -139,7 +152,7 @@ module RSpec
       def params_inspect(obj)
         begin
           obj.is_a?(Proc) ? obj.to_raw_source : obj.inspect
-        rescue Sourcify::NoMatchingProcError
+        rescue Parser::SyntaxError
           return obj.inspect
         end
       end
