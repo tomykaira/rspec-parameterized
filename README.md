@@ -1,4 +1,4 @@
-# RSpec::Parameterized
+# RSpec::Parameterized [![Build Status](https://travis-ci.org/tomykaira/rspec-parameterized.svg)](https://travis-ci.org/tomykaira/rspec-parameterized)
 
 Support simple parameterized test syntax in rspec.
 
@@ -10,7 +10,7 @@ Support simple parameterized test syntax in rspec.
           [0 , 0 , 0]
         ]
       end
-    
+
       with_them do
         it "should do additions" do
           (a + b).should == answer
