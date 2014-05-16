@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 I was inspired by [udzura's mock](https://gist.github.com/1881139).}
   gem.homepage      = ""
 
-  gem.add_dependency('rspec', '~> 2.13')
+  gem.add_dependency('rspec', '>= 2.13', '< 4')
   gem.add_dependency('parser')
   gem.add_dependency('unparser')
   gem.add_dependency('proc_to_ast')
