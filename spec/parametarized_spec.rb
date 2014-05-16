@@ -22,13 +22,13 @@ describe RSpec::Parameterized do
 
     with_them do
       it "should do additions" do
-        (a + b).should == answer
+        expect(a + b).to eq answer
       end
     end
 
-    with_them :pending do
+    with_them pending: "PENDING" do
       it "should do additions" do
-        (a + b).should == answer
+        expect(a + b).to == answer
       end
     end
   end
@@ -60,7 +60,7 @@ describe RSpec::Parameterized do
 
     with_them do
       it "a plus b is answer" do
-        (a + b).should == answer
+        expect(a + b).to eq answer
       end
     end
   end
@@ -68,13 +68,13 @@ describe RSpec::Parameterized do
   context "when the where block is after with_them" do
     with_them do
       it "should do additions" do
-        (a + b).should == answer
+        expect(a + b).to eq answer
       end
     end
 
     with_them do
       subject { a }
-      it { should be_is_a Numeric }
+      it { should be_a Numeric }
     end
 
     where(:a, :b, :answer) do
@@ -89,7 +89,7 @@ describe RSpec::Parameterized do
   context "when the where block is between with_thems" do
     with_them do
       it "should do additions" do
-        (a + b).should == answer
+        expect(a + b).to eq answer
       end
     end
 
@@ -103,7 +103,7 @@ describe RSpec::Parameterized do
 
     with_them do
       subject { a }
-      it { should be_is_a Numeric }
+      it { should be_a Numeric }
     end
   end
 
@@ -114,7 +114,7 @@ describe RSpec::Parameterized do
 
     with_them do
       it 'can take an array of elements' do
-        x.should == x
+        expect(x).to eq x
       end
     end
   end
@@ -126,7 +126,7 @@ describe RSpec::Parameterized do
 
     with_them do
       it "a plus b is answer" do
-        (a + b).should == answer
+        expect(a + b).to eq answer
       end
     end
   end
@@ -146,7 +146,7 @@ describe RSpec::Parameterized do
 
         with_them do
           it "a plus b is answer" do
-            (a + b).should == answer
+            expect(a + b).to eq answer
           end
         end
       end
@@ -159,21 +159,21 @@ describe RSpec::Parameterized do
 
         with_them do
           it "a plus b is answer" do
-            (a + b).should == answer
+            expect(a + b).to eq answer
           end
         end
       end
 
       let(:eq_matcher) { eq(13) }
       describe "child 3 (use matcher)" do
-        where_table(:a, :b, :answer) do
+        where_table(:a, :b, :matcher) do
           1         | 2         | eq(3)
           five      | eight     | eq_matcher
         end
 
         with_them do
           it "a plus b is answer" do
-            (a + b).should answer
+            expect(a + b).to matcher
           end
         end
       end
