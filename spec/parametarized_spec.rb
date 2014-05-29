@@ -148,16 +148,18 @@ describe RSpec::Parameterized do
     end
   end
 
-  context "when the table has only a row (using TableSyntax)" do
-    using RSpec::Parameterized::TableSyntax
+  if RUBY_VERSION >= "2.1"
+    context "when the table has only a row (using TableSyntax)" do
+      using RSpec::Parameterized::TableSyntax
 
-    where(:a, :b, :answer) do
-      1         | 2         | 3
-    end
+      where(:a, :b, :answer) do
+        1         | 2         | 3
+      end
 
-    with_them do
-      it "a plus b is answer" do
-        expect(a + b).to eq answer
+      with_them do
+        it "a plus b is answer" do
+          expect(a + b).to eq answer
+        end
       end
     end
   end
