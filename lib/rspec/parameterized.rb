@@ -5,6 +5,66 @@ require 'proc_to_ast'
 
 module RSpec
   module Parameterized
+    class Table
+      def initialize(row)
+        @rows = [row]
+      end
+
+      def >(row)
+        @rows << row
+        self
+      end
+
+      def to_a
+        @rows.map(&:to_a)
+      end
+
+      class Row
+        def initialize(data)
+          @data = [data]
+        end
+
+        def |(other)
+          @data << other
+          self
+        end
+
+        def >(other)
+          Table.new(self) > other
+        end
+
+        def to_a
+          @data
+        end
+      end
+    end
+
+    module TableSyntax
+      refine Object do
+        def |(other)
+          Table::Row.new(self) | other
+        end
+      end
+
+      refine Fixnum do
+        def |(other)
+          Table::Row.new(self) | other
+        end
+      end
+
+      refine Bignum do
+        def |(other)
+          Table::Row.new(self) | other
+        end
+      end
+
+      refine Array do
+        def |(other)
+          Table::Row.new(self) | other
+        end
+      end
+    end
+
     module ExampleGroupMethods
 
       # capsulize parameter attributes
@@ -130,7 +190,10 @@ module RSpec
         if parameter.table_format
           param_sets = separate_table_like_block(parameter.block)
         else
-          param_sets = instance.instance_eval(&parameter.block)
+          extracted_parameters = instance.instance_eval(&parameter.block)
+          param_sets = extracted_parameters.is_a?(RSpec::Parameterized::Table::Row) \
+            ? [extracted_parameters.to_a]
+            : extracted_parameters.to_a
         end
 
         # for only one parameters
