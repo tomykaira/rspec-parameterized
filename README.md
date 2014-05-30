@@ -2,21 +2,39 @@
 
 Support simple parameterized test syntax in rspec.
 
-    describe "plus" do
-      where(:a, :b, :answer) do
-        [
-          [1 , 2 , 3],
-          [5 , 8 , 13],
-          [0 , 0 , 0]
-        ]
-      end
+```ruby
+describe "plus" do
+  where(:a, :b, :answer) do
+    [
+      [1 , 2 , 3],
+      [5 , 8 , 13],
+      [0 , 0 , 0]
+    ]
+  end
 
-      with_them do
-        it "should do additions" do
-          (a + b).should == answer
-        end
-      end
+  with_them do
+    it "should do additions" do
+      (a + b).should == answer
     end
+  end
+end
+
+describe "plus" do
+  using RSpec::Parameterized::TableSyntax
+
+  where(:a, :b, :answer) do
+    1 | 2 | 3  >
+    5 | 8 | 13 >
+    0 | 0 | 0
+  end
+
+  with_them do
+    it "should do additions" do
+      (a + b).should == answer
+    end
+  end
+end
+```
 
 I was inspired by [udzura's mock](https://gist.github.com/1881139).
 
