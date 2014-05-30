@@ -126,10 +126,6 @@ module RSpec
         instance.instance_eval(source_fragment)
       end
 
-      def ruby2ruby
-        @ruby2ruby ||= Ruby2Ruby.new
-      end
-
       def define_cases(parameter, *args, &block)
         instance = new  # for evaluate let methods.
         if defined?(self.superclass::LetDefinitions)
