@@ -5,68 +5,9 @@ require 'proc_to_ast'
 
 module RSpec
   module Parameterized
-    class Table
-      def initialize(row)
-        @rows = [row]
-      end
-
-      def >(row)
-        @rows << row
-        self
-      end
-
-      def to_a
-        @rows.map(&:to_a)
-      end
-
-      class Row
-        def initialize(data)
-          @data = [data]
-        end
-
-        def |(other)
-          @data << other
-          self
-        end
-
-        def >(other)
-          Table.new(self) > other
-        end
-
-        def to_a
-          @data
-        end
-      end
-    end
-
-    module TableSyntax
-      refine Object do
-        def |(other)
-          Table::Row.new(self) | other
-        end
-      end
-
-      refine Fixnum do
-        def |(other)
-          Table::Row.new(self) | other
-        end
-      end
-
-      refine Bignum do
-        def |(other)
-          Table::Row.new(self) | other
-        end
-      end
-
-      refine Array do
-        def |(other)
-          Table::Row.new(self) | other
-        end
-      end
-    end
+    autoload :TableSyntax, 'rspec/parameterized/table_syntax'
 
     module ExampleGroupMethods
-
       # capsulize parameter attributes
       class Parameter
         attr_reader :arg_names, :table_format, :block
@@ -78,7 +19,7 @@ module RSpec
 
       # Set parameters to be bound in specs under this example group.
       #
-      # ## Example
+      # ## Example1
       #
       #     where(:a, :b, :answer) do
       #       [
@@ -86,6 +27,14 @@ module RSpec
       #         [5 , 8 , 13],
       #         [0 , 0 , 0]
       #       ]
+      #     end
+      #
+      # ## Example2
+      #     using RSpec::Parameterized::TableSyntax
+      #     where(:a, :b, :answer) do
+      #       1 | 2 | 3 >
+      #       5 | 8 | 13 >
+      #       0 | 0 | 0
       #     end
       #
       def where(*args, &b)
@@ -190,10 +139,8 @@ module RSpec
         if parameter.table_format
           param_sets = separate_table_like_block(parameter.block)
         else
-          extracted_parameters = instance.instance_eval(&parameter.block)
-          param_sets = extracted_parameters.is_a?(RSpec::Parameterized::Table::Row) \
-            ? [extracted_parameters.to_a]
-            : extracted_parameters.to_a
+          extracted = instance.instance_eval(&parameter.block)
+          param_sets = extracted.is_a?(Array) ? extracted : extracted.to_params
         end
 
         # for only one parameters
