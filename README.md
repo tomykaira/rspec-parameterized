@@ -23,8 +23,8 @@ describe "plus" do
   using RSpec::Parameterized::TableSyntax
 
   where(:a, :b, :answer) do
-    1 | 2 | 3  >
-    5 | 8 | 13 >
+    1 | 2 | 3
+    5 | 8 | 13
     0 | 0 | 0
   end
 
