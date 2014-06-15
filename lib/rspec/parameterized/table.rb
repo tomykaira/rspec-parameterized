@@ -1,15 +1,26 @@
 module RSpec
   module Parameterized
     class Table
-      def initialize(row)
-        @rows = [row]
+      attr_reader :last_row
+
+      def initialize
+        @rows = []
+        @last_row = nil
       end
 
       def add_row(row)
-        @rows << row
+        unless @rows.find {|r| r.object_id == row.object_id}
+          @rows << row
+          @last_row = row
+        end
         self
       end
-      alias :> :add_row
+
+      def add_param_to_last_row(param)
+        last_row.add_param(param)
+        self
+      end
+      alias :| :add_param_to_last_row
 
       def to_a
         @rows.map(&:to_a)
@@ -23,14 +34,7 @@ module RSpec
 
         def add_param(param)
           @params << param
-          self
         end
-        alias :| :add_param
-
-        def next_row(other)
-          Table.new(self) > other
-        end
-        alias :> :next_row
 
         def to_a
           @params

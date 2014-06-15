@@ -69,14 +69,30 @@ describe RSpec::Parameterized do
       using RSpec::Parameterized::TableSyntax
 
       where(:a, :b, :answer) do
-        1         | 2         | 3 >
-        "hello "  | "world"   | "hello world" >
+        1         | 2         | 3
+        "hello "  | "world"   | "hello world"
         [1, 2, 3] | [4, 5, 6] | [1, 2, 3, 4, 5, 6]
       end
 
       with_them do
         it "a plus b is answer" do
           expect(a + b).to eq answer
+        end
+      end
+    end
+
+    describe "table separated with pipe and lambda parameter (using TableSyntax)" do
+      using RSpec::Parameterized::TableSyntax
+
+      where(:a, :b, :matcher) do
+        1         | 2         | -> { eq(3) }
+        "hello "  | "world"   | -> { eq("hello world") }
+        [1, 2, 3] | [4, 5, 6] | -> { be_a(Array) }
+      end
+
+      with_them do
+        it "a plus b is answer" do
+          expect(a + b).to instance_exec(&matcher)
         end
       end
     end
@@ -202,7 +218,7 @@ describe RSpec::Parameterized do
           using RSpec::Parameterized::TableSyntax
 
           where(:a, :b, :answer) do
-            1         | 2         | 3 >
+            1         | 2         | 3
             five      | eight     | 13
           end
 
