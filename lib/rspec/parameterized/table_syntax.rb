@@ -38,6 +38,18 @@ module RSpec
       refine Array do
         include TableSyntaxImplement
       end
+
+      refine NilClass do
+        include TableSyntaxImplement
+      end
+
+      refine TrueClass do
+        include TableSyntaxImplement
+      end
+
+      refine FalseClass do
+        include TableSyntaxImplement
+      end
     end
   end
 end
