@@ -178,6 +178,20 @@ describe RSpec::Parameterized do
         end
       end
     end
+    context "when 1st column is nil or true or false" do
+      using RSpec::Parameterized::TableSyntax
+      where(:a, :result) do
+        nil   | nil
+        false | false
+        true  | true
+      end
+
+      with_them do
+        it "a is result" do
+          expect(a).to be result
+        end
+      end
+    end
   end
 
   context "when the where has let variables, defined by parent example group" do
