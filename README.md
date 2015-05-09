@@ -14,7 +14,7 @@ describe "plus" do
 
   with_them do
     it "should do additions" do
-      (a + b).should == answer
+      expect(a + b).to eq answer
     end
   end
 end
@@ -30,7 +30,7 @@ describe "plus" do
 
   with_them do
     it "should do additions" do
-      (a + b).should == answer
+      expect(a + b).to eq answer
     end
   end
 end
