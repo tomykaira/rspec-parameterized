@@ -38,7 +38,17 @@ module RSpec
       #     end
       #
       def where(*args, &b)
-        set_parameters(args, false, &b)
+
+        if args.size == 1 && (params = args[0]).instance_of?(Hash)
+          first, *rest = params.keys
+
+          set_parameters(params.keys, false) {
+            rest_values = rest.map {|k| params[k] }
+            params[first].product(*rest_values)
+          }
+        else
+          set_parameters(args, false, &b)
+        end
       end
 
       # Set parameters to be bound in specs under this example group.
