@@ -136,22 +136,51 @@ module RSpec
           param_sets = separate_table_like_block(parameter.block)
         else
           extracted = instance.instance_eval(&parameter.block)
-          param_sets = extracted.is_a?(Array) ? extracted : extracted.to_params
+          if extracted.is_a?(Array)
+            param_sets = extracted
+          else
+            if extracted.respond_to?(:to_params)
+              param_sets = extracted.to_params
+            else
+              param_sets = extracted
+            end
+          end
         end
 
-        # for only one parameters
-        param_sets = param_sets.map { |x| Array[x] } if !param_sets[0].is_a?(Array)
+        keys = []
+        if param_sets.is_a?(Hash)
+          define_case_node(parameter, args, block, param_sets, keys)
+        else
+          # for only one parameters
+          param_sets = param_sets.map { |x| Array[x] } if !param_sets[0].is_a?(Array)
 
-        param_sets.each do |params|
-          pairs = [parameter.arg_names, params].transpose
-          pretty_params = pairs.map {|t| "#{t[0]}: #{params_inspect(t[1])}"}.join(", ")
-          describe(pretty_params, *args) do
-            pairs.each do |n|
-              let(n[0]) { n[1] }
-            end
-
-            module_eval(&block)
+          param_sets.each do |params|
+            define_assert(parameter, args, block, params, keys)
           end
+        end
+      end
+
+      def define_case_node(parameter, args, block, param_sets, keys)
+        if param_sets.is_a?(Hash)
+          param_sets.map do |key, params|
+            describe key.to_s do
+              define_case_node(parameter, args, block, params, keys+[key])
+            end
+          end
+        else
+          define_assert(parameter, args, block, param_sets, keys)
+        end
+      end
+
+      def define_assert(parameter, args, block, params, keys)
+        pairs = [parameter.arg_names, keys + params].transpose
+        pretty_params = pairs.map {|t| "#{t[0]}: #{params_inspect(t[1])}"}.join(", ")
+        describe(pretty_params, *args) do
+          pairs.each do |n|
+            let(n[0]) { n[1] }
+          end
+
+          module_eval(&block)
         end
       end
 
