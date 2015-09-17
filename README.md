@@ -3,6 +3,7 @@
 Support simple parameterized test syntax in rspec.
 
 ```ruby
+# Nested Array Style
 describe "plus" do
   where(:a, :b, :answer) do
     [
@@ -19,6 +20,35 @@ describe "plus" do
   end
 end
 
+# Hash and Array Style
+# Given parameters is each value combinations
+# On this case
+# [
+#   [1, 5, 2],
+#   [1, 5, 4],
+#   [1, 7, 2],
+#   [1, 7, 4],
+#   [1, 9, 2],
+#   [1, 9, 4],
+#   [3, 5, 2],
+#   [3, 5, 4],
+#   [3, 7, 2],
+#   [3, 7, 4],
+#   [3, 9, 2],
+#   [3, 9, 4]
+# ]
+describe "Hash arguments" do
+  where(a: [1, 3], b: [5, 7, 9], c: [2, 4])
+
+  with_them do
+    it "sums is even" do
+      expect(a + b + c).to be_even
+    end
+  end
+end
+
+# Table Syntax Style (like Groovy spock)
+# Need ruby-2.1 or later
 describe "plus" do
   using RSpec::Parameterized::TableSyntax
 
