@@ -1,6 +1,5 @@
 sudo: false
 rvm:
-  - 2.0
   - 2.1
   - 2.2
 
@@ -8,7 +7,4 @@ gemfile:
   - gemfiles/rspec2.gemfile
   - gemfiles/rspec3.gemfile
   - gemfiles/rspec3.2.gemfile
-
-matrix:
-  allow_failures:
-   - rvm: 1.9.3
+  - gemfiles/rspec3.3.gemfile
