@@ -40,11 +40,11 @@ module RSpec
       def where(*args, &b)
 
         if args.size == 1 && (params = args[0]).instance_of?(Hash)
-          first, *rest = params.keys
+          first, *rest = params.values
 
           set_parameters(params.keys, false) {
             rest_values = rest.map {|k| params[k] }
-            params[first].product(*rest_values)
+            first.product(*rest)
           }
         else
           set_parameters(args, false, &b)
