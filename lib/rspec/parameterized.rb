@@ -63,6 +63,8 @@ module RSpec
       #     end
       #
       def where_table(*args, &b)
+        warn "deprecated: `where_table` method is deprecated. Please use `using RSpec::Parameterized::TableSyntax`"
+        warn caller.first
         set_parameters(args, true, &b)
       end
 
