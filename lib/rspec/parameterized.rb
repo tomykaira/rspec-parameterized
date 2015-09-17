@@ -44,7 +44,6 @@ module RSpec
           first, *rest = params.values
 
           set_parameters(params.keys, false) {
-            rest_values = rest.map {|k| params[k] }
             first.product(*rest)
           }
         else
