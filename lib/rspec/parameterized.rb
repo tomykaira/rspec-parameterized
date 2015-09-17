@@ -39,7 +39,8 @@ module RSpec
       #
       def where(*args, &b)
 
-        if args.size == 1 && (params = args[0]).instance_of?(Hash)
+        if args.size == 1 && args[0].instance_of?(Hash)
+          params = args[0]
           first, *rest = params.values
 
           set_parameters(params.keys, false) {
