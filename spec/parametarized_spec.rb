@@ -50,6 +50,16 @@ describe RSpec::Parameterized do
     end
   end
 
+  describe "Hash arguments" do
+    where(a: [1, 3], b: [5, 7, 9], c: [2, 4])
+
+    with_them do
+      it "sums is even" do
+        expect(a + b + c).to be_even
+      end
+    end
+  end
+
   describe "table separated with pipe" do
     where_table(:a, :b, :answer) do
       1         | 2         | 3
