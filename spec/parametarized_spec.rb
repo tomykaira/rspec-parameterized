@@ -60,6 +60,27 @@ describe RSpec::Parameterized do
     end
   end
 
+  describe "hash parameter" do
+    where(:a, :b, :answer) do
+      {
+        1 => [2 , 3],
+        2 => [8 , 10],
+      }
+    end
+
+    with_them do
+      it "should do additions" do
+        expect(a + b).to eq answer
+      end
+    end
+
+    with_them pending: "PENDING" do
+      it "should do additions" do
+        expect(a + b).to == answer
+      end
+    end
+  end
+
   describe "table separated with pipe" do
     where_table(:a, :b, :answer) do
       1         | 2         | 3
