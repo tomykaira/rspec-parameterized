@@ -14,8 +14,10 @@ namespace :spec do
   %w(rspec2 rspec3 rspec3.2).each do |gemfile|
     desc "Run Tests by #{gemfile}.gemfile"
     task gemfile do
-      sh "BUNDLE_GEMFILE='gemfiles/#{gemfile}.gemfile' bundle install --path .bundle"
-      sh "BUNDLE_GEMFILE='gemfiles/#{gemfile}.gemfile' bundle exec rake -t spec"
+      Bundler.with_clean_env do
+        sh "BUNDLE_GEMFILE='gemfiles/#{gemfile}.gemfile' bundle install --path .bundle"
+        sh "BUNDLE_GEMFILE='gemfiles/#{gemfile}.gemfile' bundle exec rake -t spec"
+      end
     end
   end
 
