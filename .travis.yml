@@ -1,10 +1,9 @@
 sudo: false
 rvm:
-  - 2.1
   - 2.2
+  - 2.3
 
 gemfile:
   - gemfiles/rspec2.gemfile
-  - gemfiles/rspec3.gemfile
-  - gemfiles/rspec3.2.gemfile
   - gemfiles/rspec3.3.gemfile
+  - gemfiles/rspec3.4.gemfile

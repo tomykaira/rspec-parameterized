@@ -11,7 +11,7 @@ begin
 end
 
 namespace :spec do
-  %w(rspec2 rspec3 rspec3.2).each do |gemfile|
+  %w(rspec2 rspec3.3 rspec3.4).each do |gemfile|
     desc "Run Tests by #{gemfile}.gemfile"
     task gemfile do
       Bundler.with_clean_env do
@@ -23,7 +23,7 @@ namespace :spec do
 
   desc "Run All Tests"
   task :all do
-    %w(rspec2 rspec3 rspec3.2).each do |gemfile|
+    %w(rspec2 rspec3.3 rspec3.4).each do |gemfile|
       Rake::Task["spec:#{gemfile}"].invoke
     end
   end
