@@ -26,6 +26,12 @@ describe RSpec::Parameterized do
       end
     end
 
+    with_them do
+      it "#{params[:a]} + #{params[:b]} == #{params[:answer]}" do
+        expect(a + b).to eq answer
+      end
+    end
+
     with_them pending: "PENDING" do
       it "should do additions" do
         expect(a + b).to == answer

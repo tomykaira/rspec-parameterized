@@ -18,6 +18,14 @@ describe "plus" do
       expect(a + b).to eq answer
     end
   end
+
+  with_them do
+    # Can browse parameters via `params` method in with_them block
+    # Can browse all parameters via `all_params` method in with_them block
+    it "#{params[:a]} + #{params[:b]} == #{params[:answer]}" do
+      expect(a + b).to eq answer
+    end
+  end
 end
 
 # Hash and Array Style
