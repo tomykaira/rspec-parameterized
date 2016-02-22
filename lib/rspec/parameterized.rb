@@ -93,12 +93,30 @@ module RSpec
         # for only one parameters
         param_sets = param_sets.map { |x| Array[x] } if !param_sets[0].is_a?(Array)
 
-        param_sets.each do |params|
-          pairs = [parameter.arg_names, params].transpose
-          pretty_params = pairs.map {|t| "#{t[0]}: #{params_inspect(t[1])}"}.join(", ")
+        param_sets.each do |param_set|
+          pairs = [parameter.arg_names, param_set].transpose.to_h
+          pretty_params = pairs.map {|name, val| "#{name}: #{params_inspect(val)}"}.join(", ")
           describe(pretty_params, *args) do
-            pairs.each do |n|
-              let(n[0]) { n[1] }
+            pairs.each do |name, val|
+              let(name) { val }
+            end
+
+            singleton_class.module_eval do
+              if respond_to?(:params)
+                warn "ExampleGroup.params method is overrided."
+              end
+
+              define_method(:params) do
+                pairs
+              end
+
+              if respond_to?(:all_params)
+                warn "ExampleGroup.all_params method is overrided."
+              end
+
+              define_method(:all_params) do
+                param_sets
+              end
             end
 
             module_eval(&block)
