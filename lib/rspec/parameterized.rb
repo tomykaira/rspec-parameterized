@@ -10,10 +10,10 @@ module RSpec
     module ExampleGroupMethods
       # capsulize parameter attributes
       class Parameter
-        attr_reader :arg_names, :table_format, :block
+        attr_reader :arg_names, :block
 
-        def initialize(arg_names, table_format, &block)
-          @arg_names, @table_format, @block = arg_names, table_format, block
+        def initialize(arg_names, &block)
+          @arg_names, @block = arg_names, block
         end
       end
 
@@ -43,29 +43,12 @@ module RSpec
           params = args[0]
           first, *rest = params.values
 
-          set_parameters(params.keys, false) {
+          set_parameters(params.keys) {
             first.product(*rest)
           }
         else
-          set_parameters(args, false, &b)
+          set_parameters(args, &b)
         end
-      end
-
-      # Set parameters to be bound in specs under this example group.
-      # You can separate fields with | like a cucumber table.
-      #
-      # ## Example
-      #
-      #     where_table(:a, :b, :answer) do
-      #       1 | 2 | 3
-      #       5 | 8 | 13
-      #       0 | 0 | 0
-      #     end
-      #
-      def where_table(*args, &b)
-        warn "deprecated: `where_table` method is deprecated. Please use `using RSpec::Parameterized::TableSyntax`"
-        warn caller.first
-        set_parameters(args, true, &b)
       end
 
       # Use parameters to execute the block.
@@ -88,8 +71,8 @@ module RSpec
       end
 
       private
-      def set_parameters(arg_names, table_format, &b)
-        @parameter = Parameter.new(arg_names, table_format, &b)
+      def set_parameters(arg_names, &b)
+        @parameter = Parameter.new(arg_names, &b)
 
         if @parameterized_pending_cases
           @parameterized_pending_cases.each { |e|
@@ -144,12 +127,8 @@ module RSpec
           instance.extend self.superclass::LetDefinitions
         end
 
-        if parameter.table_format
-          param_sets = separate_table_like_block(parameter.block)
-        else
-          extracted = instance.instance_eval(&parameter.block)
-          param_sets = extracted.is_a?(Array) ? extracted : extracted.to_params
-        end
+        extracted = instance.instance_eval(&parameter.block)
+        param_sets = extracted.is_a?(Array) ? extracted : extracted.to_params
 
         # for only one parameters
         param_sets = param_sets.map { |x| Array[x] } if !param_sets[0].is_a?(Array)

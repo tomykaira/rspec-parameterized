@@ -60,20 +60,6 @@ describe RSpec::Parameterized do
     end
   end
 
-  describe "table separated with pipe" do
-    where_table(:a, :b, :answer) do
-      1         | 2         | 3
-      "hello "  | "world"   | "hello world"
-      [1, 2, 3] | [4, 5, 6] | [1, 2, 3, 4, 5, 6]
-    end
-
-    with_them do
-      it "a plus b is answer" do
-        expect(a + b).to eq answer
-      end
-    end
-  end
-
   if RUBY_VERSION >= "2.1"
     describe "table separated with pipe (using TableSyntax)" do
       using RSpec::Parameterized::TableSyntax
@@ -162,18 +148,6 @@ describe RSpec::Parameterized do
     end
   end
 
-  context "when the table has only a row" do
-    where_table(:a, :b, :answer) do
-      1         | 2         | 3
-    end
-
-    with_them do
-      it "a plus b is answer" do
-        expect(a + b).to eq answer
-      end
-    end
-  end
-
   if RUBY_VERSION >= "2.1"
     context "when the table has only a row (using TableSyntax)" do
       using RSpec::Parameterized::TableSyntax
@@ -215,19 +189,6 @@ describe RSpec::Parameterized do
             [1 , 2 , 3],
             [five , eight , 13],
           ]
-        end
-
-        with_them do
-          it "a plus b is answer" do
-            expect(a + b).to eq answer
-          end
-        end
-      end
-
-      describe "child 2 (where_table)" do
-        where_table(:a, :b, :answer) do
-          1         | 2         | 3
-          five      | eight     | 13
         end
 
         with_them do
