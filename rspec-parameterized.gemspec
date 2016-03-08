@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{RSpec::Parameterized supports simple parameterized test syntax in rspec.}
   gem.summary       = %q{RSpec::Parameterized supports simple parameterized test syntax in rspec.
 I was inspired by [udzura's mock](https://gist.github.com/1881139).}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/tomykaira/rspec-parameterized"
 
   gem.add_dependency('rspec', '>= 2.13', '< 4')
   gem.add_dependency('parser')
