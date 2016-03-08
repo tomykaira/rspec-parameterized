@@ -4,8 +4,13 @@ sudo: false
 rvm:
   - 2.2
   - 2.3.0
+  - ruby-head
 
 gemfile:
   - gemfiles/rspec2.gemfile
   - gemfiles/rspec3.3.gemfile
   - gemfiles/rspec3.4.gemfile
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
