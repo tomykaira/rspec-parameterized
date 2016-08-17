@@ -1,4 +1,4 @@
-# RSpec::Parameterized [![Build Status](https://travis-ci.org/tomykaira/rspec-parameterized.svg)](https://travis-ci.org/tomykaira/rspec-parameterized)
+# RSpec::Parameterized [![Gem Version](https://badge.fury.io/rb/rspec-parameterized.svg)](https://badge.fury.io/rb/rspec-parameterized) [![Build Status](https://travis-ci.org/tomykaira/rspec-parameterized.svg)](https://travis-ci.org/tomykaira/rspec-parameterized)
 
 Support simple parameterized test syntax in rspec.
 
