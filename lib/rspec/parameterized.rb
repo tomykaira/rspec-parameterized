@@ -62,6 +62,10 @@ module RSpec
       #     end
       #
       def with_them(*args, &b)
+        opts = args.last.is_a?(Hash) ? args.pop : {}
+        opts[:caller] = caller unless opts[:caller]
+        args.push(opts)
+
         if @parameter.nil?
           @parameterized_pending_cases ||= []
           @parameterized_pending_cases << [args, b]
