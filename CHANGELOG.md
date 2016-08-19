@@ -1,5 +1,27 @@
 # Change Log
 
+## [Unreleased](https://github.com/tomykaira/rspec-parameterized/tree/HEAD)
+
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.3.1...HEAD)
+
+**Merged pull requests:**
+
+- Add rubygems version badge [\#38](https://github.com/tomykaira/rspec-parameterized/pull/38) ([sue445](https://github.com/sue445))
+
+## [v0.3.1](https://github.com/tomykaira/rspec-parameterized/tree/v0.3.1) (2016-08-17)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.3.0...v0.3.1)
+
+**Closed issues:**
+
+- Support "||" syntax [\#34](https://github.com/tomykaira/rspec-parameterized/issues/34)
+
+**Merged pull requests:**
+
+- Set the caller of `.with\_them` to metadata of ExampleGroup [\#37](https://github.com/tomykaira/rspec-parameterized/pull/37) ([nalabjp](https://github.com/nalabjp))
+- Add homepage url in gemspec [\#33](https://github.com/tomykaira/rspec-parameterized/pull/33) ([sue445](https://github.com/sue445))
+- Tweak travis setting [\#32](https://github.com/tomykaira/rspec-parameterized/pull/32) ([sue445](https://github.com/sue445))
+- Generate CHANGELOG [\#31](https://github.com/tomykaira/rspec-parameterized/pull/31) ([sue445](https://github.com/sue445))
+
 ## [v0.3.0](https://github.com/tomykaira/rspec-parameterized/tree/v0.3.0) (2016-02-22)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.2.0...v0.3.0)
 
