@@ -27,12 +27,18 @@ module RSpec
         include TableSyntaxImplement
       end
 
-      refine Fixnum do
-        include TableSyntaxImplement
-      end
+      if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create("2.4.0")
+        refine Integer do
+          include TableSyntaxImplement
+        end
+      else
+        refine Fixnum do
+          include TableSyntaxImplement
+        end
 
-      refine Bignum do
-        include TableSyntaxImplement
+        refine Bignum do
+          include TableSyntaxImplement
+        end
       end
 
       refine Array do
