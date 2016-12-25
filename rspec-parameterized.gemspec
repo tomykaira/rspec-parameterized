@@ -14,7 +14,7 @@ I was inspired by [udzura's mock](https://gist.github.com/1881139).}
   gem.add_dependency('unparser')
   gem.add_dependency('proc_to_ast')
   gem.add_dependency('binding_of_caller')
-  gem.add_development_dependency('rake')
+  gem.add_development_dependency('rake', '< 12.0.0')
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
