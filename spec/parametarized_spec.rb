@@ -74,6 +74,7 @@ describe RSpec::Parameterized do
         1         | 2         | 3
         "hello "  | "world"   | "hello world"
         [1, 2, 3] | [4, 5, 6] | [1, 2, 3, 4, 5, 6]
+        100000000000000000000 | 100000000000000000000 | 200000000000000000000
       end
 
       with_them do
@@ -90,6 +91,7 @@ describe RSpec::Parameterized do
         1         | 2         | -> { eq(3) }
         "hello "  | "world"   | -> { eq("hello world") }
         [1, 2, 3] | [4, 5, 6] | -> { be_a(Array) }
+        100000000000000000000 | 100000000000000000000 | -> { eq(200000000000000000000) }
       end
 
       with_them do
