@@ -1,11 +1,12 @@
 # Change Log
 
-## [Unreleased](https://github.com/tomykaira/rspec-parameterized/tree/HEAD)
-
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.3.1...HEAD)
+## [v0.3.2](https://github.com/tomykaira/rspec-parameterized/tree/v0.3.2) (2016-12-26)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.3.1...v0.3.2)
 
 **Merged pull requests:**
 
+- Fix deprecation warning on ruby 2.4.0 [\#40](https://github.com/tomykaira/rspec-parameterized/pull/40) ([sue445](https://github.com/sue445))
+- Add release note for v0.3.1 [\#39](https://github.com/tomykaira/rspec-parameterized/pull/39) ([sue445](https://github.com/sue445))
 - Add rubygems version badge [\#38](https://github.com/tomykaira/rspec-parameterized/pull/38) ([sue445](https://github.com/sue445))
 
 ## [v0.3.1](https://github.com/tomykaira/rspec-parameterized/tree/v0.3.1) (2016-08-17)
