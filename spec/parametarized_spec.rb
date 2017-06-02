@@ -66,6 +66,66 @@ describe RSpec::Parameterized do
     end
   end
 
+  describe "Custom test case name" do
+    context "when regular arguments" do
+      where(:case_name, :a, :b, :answer) do
+        [
+            ["positive integers",  6,  2,  8],
+            ["negative integers", -1, -2, -3],
+            [   "mixed integers", -5,  3, -2],
+        ]
+      end
+
+      with_them do
+        it "should do additions" do
+          expect(a + b).to eq answer
+        end
+
+        it "should have custom test name" do |example|
+          expect(example.metadata[:example_group][:description]).to eq case_name
+        end
+      end
+    end
+
+    context "when hash arguments" do
+      where(case_names: ->(a, b, c){"#{a} + #{b} + #{c}"}, a: [1, 3], b: [5, 7, 9], c: [2, 4])
+
+      with_them do
+        it "sum is even" do
+          expect(a + b + c).to be_even
+        end
+
+        it "should have custom names" do |example|
+          expect(example.metadata[:example_group][:description]).to include "+"
+        end
+      end
+    end
+
+    if RUBY_VERSION >= "2,1"
+      context "when arguments are separated with pipe (using TableSyntax)" do
+        using RSpec::Parameterized::TableSyntax
+
+        where(:case_name, :a, :b, :answer) do
+          "integers"      | 1                     | 2                     | 3
+          "strings"       | "hello "              | "world"               | "hello world"
+          "arrays"        | [1, 2, 3]             | [4, 5, 6]             | [1, 2, 3, 4, 5, 6]
+          "giant numbers" | 100000000000000000000 | 100000000000000000000 | 200000000000000000000
+        end
+
+        with_them do
+          it "a plus b is answer" do
+            expect(a + b).to eq answer
+          end
+
+          it "should have custom test name" do |example|
+            expect(example.metadata[:example_group][:description]).to eq case_name
+          end
+        end
+      end
+    end
+
+  end
+
   if RUBY_VERSION >= "2.1"
     describe "table separated with pipe (using TableSyntax)" do
       using RSpec::Parameterized::TableSyntax
