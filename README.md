@@ -74,6 +74,14 @@ describe "plus" do
 end
 
 # It's also possible to override each combination name using magic variable :case_name
+# Output:
+# Custom test case name
+#   positive integers
+#     should do additions
+#   negative integers
+#     should do additions
+#   mixed integers
+#     should do additions
 describe "Custom names for regular syntax" do
   where(:case_name, :a, :b, :answer) do
     [
@@ -87,16 +95,18 @@ describe "Custom names for regular syntax" do
     it "should do additions" do
       expect(a + b).to eq answer
   end
-# Output:
-# Custom test case name
-#   positive integers
-#     should do additions
-#   negative integers
-#     should do additions
-#   mixed integers
-#     should do additions
+end
 
 # Or :case_names lambda for hash syntax
+# Output:
+# when hash arguments
+#   1 + 5 + 2
+#     sum is even
+#   1 + 5 + 4
+#     sum is even
+#   1 + 7 + 2
+#     sum is even
+#   ...
 describe "Custom naming for hash syntax" do
   where(case_names: ->(a, b, c){"#{a} + #{b} + #{c}"}, a: [1, 3], b: [5, 7, 9], c: [2, 4])
 
@@ -107,15 +117,6 @@ describe "Custom naming for hash syntax" do
   end
 end
 
-# Output:
-# when hash arguments
-#   1 + 5 + 2
-#     sum is even
-#   1 + 5 + 4
-#     sum is even
-#   1 + 7 + 2
-#     sum is even
-#   ...
 ```
 
 I was inspired by [udzura's mock](https://gist.github.com/1881139).
