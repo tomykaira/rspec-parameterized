@@ -66,6 +66,71 @@ describe RSpec::Parameterized do
     end
   end
 
+  describe "Verbose syntax" do
+    where do
+      {
+          "positive integers" => {
+              a: 1,
+              b: 2,
+              answer: 3,
+          },
+          "negative_integers" => {
+              a: -1,
+              b: -2,
+              answer: -3,
+          },
+          "mixed_integers" => {
+              a: 3,
+              b: -3,
+              answer: 0,
+          },
+      }
+    end
+
+    with_them do
+      it "should do additions" do
+        expect(a + b).to eq answer
+      end
+
+      it "should have custom name" do |example|
+        expect(example.metadata[:example_group][:description]).to eq case_name
+      end
+    end
+
+    context "lambda parameter" do
+      where do
+        {
+            "integers" => {
+                a: 1,
+                b: 2,
+                answer: -> {expect(subject).to eq 3},
+            },
+            "strings" => {
+                a: "hello ",
+                b: "world",
+                answer: -> {expect(subject).to include "lo wo"},
+            },
+            "arrays" => {
+                a: [1, 2, 3],
+                b: [4, 5, 6],
+                answer: -> {expect(subject.size).to eq 6}
+            }
+        }
+      end
+
+      with_them do
+        subject {a + b}
+        it "should do additions" do
+          self.instance_exec(&answer)
+        end
+
+        it "should have custom name" do |example|
+          expect(example.metadata[:example_group][:description]).to eq(case_name)
+        end
+      end
+    end
+  end
+
   describe "Custom test case name" do
     context "when regular arguments" do
       where(:case_name, :a, :b, :answer) do

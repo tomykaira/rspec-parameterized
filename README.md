@@ -73,6 +73,36 @@ describe "plus" do
   end
 end
 
+# Verbose Syntax
+# For complex inputs or if you just want to be super explicit
+describe "Verbose syntax" do
+  where do
+    {
+        "positive integers" => {
+            a: 1,
+            b: 2,
+            answer: 3,
+        },
+        "negative_integers" => {
+            a: -1,
+            b: -2,
+            answer: -3,
+        },
+        "mixed_integers" => {
+            a: 3,
+            b: -3,
+            answer: 0,
+        },
+    }
+  end
+
+  with_them do
+    it "should do additions" do
+      expect(a + b).to eq answer
+    end
+  end
+end
+
 # It's also possible to override each combination name using magic variable :case_name
 # Output:
 # Custom test case name
