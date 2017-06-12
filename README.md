@@ -85,9 +85,9 @@ end
 describe "Custom names for regular syntax" do
   where(:case_name, :a, :b, :answer) do
     [
-        ["positive integers",  6,  2,  8],
-        ["negative integers", -1, -2, -3],
-        [   "mixed integers", -5,  3, -2],
+      ["positive integers",  6,  2,  8],
+      ["negative integers", -1, -2, -3],
+      [   "mixed integers", -5,  3, -2],
     ]
   end
 
