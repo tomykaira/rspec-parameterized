@@ -1,5 +1,13 @@
 # Change Log
 
+## [v0.4.0](https://github.com/tomykaira/rspec-parameterized/tree/v0.4.0) (2017-06-13)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.3.2...v0.4.0)
+
+**Merged pull requests:**
+
+- Verbose test syntax [\#42](https://github.com/tomykaira/rspec-parameterized/pull/42) ([aliaksandr-martsinovich](https://github.com/aliaksandr-martsinovich))
+- Customizable description [\#41](https://github.com/tomykaira/rspec-parameterized/pull/41) ([aliaksandr-martsinovich](https://github.com/aliaksandr-martsinovich))
+
 ## [v0.3.2](https://github.com/tomykaira/rspec-parameterized/tree/v0.3.2) (2016-12-26)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.3.1...v0.3.2)
 
