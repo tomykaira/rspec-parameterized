@@ -78,21 +78,21 @@ end
 describe "Verbose syntax" do
   where do
     {
-        "positive integers" => {
-            a: 1,
-            b: 2,
-            answer: 3,
-        },
-        "negative_integers" => {
-            a: -1,
-            b: -2,
-            answer: -3,
-        },
-        "mixed_integers" => {
-            a: 3,
-            b: -3,
-            answer: 0,
-        },
+      "positive integers" => {
+        a: 1,
+        b: 2,
+        answer: 3,
+      },
+      "negative_integers" => {
+        a: -1,
+        b: -2,
+        answer: -3,
+      },
+      "mixed_integers" => {
+        a: 3,
+        b: -3,
+        answer: 0,
+      },
     }
   end
 

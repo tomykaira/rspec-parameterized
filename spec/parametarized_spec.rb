@@ -69,21 +69,21 @@ describe RSpec::Parameterized do
   describe "Verbose syntax" do
     where do
       {
-          "positive integers" => {
-              a: 1,
-              b: 2,
-              answer: 3,
-          },
-          "negative_integers" => {
-              a: -1,
-              b: -2,
-              answer: -3,
-          },
-          "mixed_integers" => {
-              a: 3,
-              b: -3,
-              answer: 0,
-          },
+        "positive integers" => {
+          a: 1,
+          b: 2,
+          answer: 3,
+        },
+        "negative_integers" => {
+          a: -1,
+          b: -2,
+          answer: -3,
+        },
+        "mixed_integers" => {
+          a: 3,
+          b: -3,
+          answer: 0,
+        },
       }
     end
 
@@ -100,21 +100,21 @@ describe RSpec::Parameterized do
     context "lambda parameter" do
       where do
         {
-            "integers" => {
-                a: 1,
-                b: 2,
-                answer: -> {expect(subject).to eq 3},
-            },
-            "strings" => {
-                a: "hello ",
-                b: "world",
-                answer: -> {expect(subject).to include "lo wo"},
-            },
-            "arrays" => {
-                a: [1, 2, 3],
-                b: [4, 5, 6],
-                answer: -> {expect(subject.size).to eq 6}
-            }
+          "integers" => {
+            a: 1,
+            b: 2,
+            answer: -> {expect(subject).to eq 3},
+          },
+          "strings" => {
+            a: "hello ",
+            b: "world",
+            answer: -> {expect(subject).to include "lo wo"},
+          },
+          "arrays" => {
+            a: [1, 2, 3],
+            b: [4, 5, 6],
+            answer: -> {expect(subject.size).to eq 6}
+          }
         }
       end
 
