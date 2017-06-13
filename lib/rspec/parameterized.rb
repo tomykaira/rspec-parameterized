@@ -40,11 +40,19 @@ module RSpec
       def where(*args, &b)
 
         if args.size == 1 && args[0].instance_of?(Hash)
+          naming_func = args.first.delete(:case_names)
           params = args[0]
           first, *rest = params.values
+          arg_names = params.keys
+          arg_values = first.product(*rest)
 
-          set_parameters(params.keys) {
-            first.product(*rest)
+          if naming_func && naming_func.respond_to?(:call)
+            arg_names << :case_name
+            arg_values.map! { |row| row << naming_func.call(*row) }
+          end
+
+          set_parameters(arg_names) {
+            arg_values
           }
         else
           set_parameters(args, &b)
@@ -99,7 +107,7 @@ module RSpec
 
         param_sets.each do |param_set|
           pairs = [parameter.arg_names, param_set].transpose.to_h
-          pretty_params = pairs.map {|name, val| "#{name}: #{params_inspect(val)}"}.join(", ")
+          pretty_params = pairs.has_key?(:case_name) ? pairs[:case_name] : pairs.map {|name, val| "#{name}: #{params_inspect(val)}"}.join(", ")
           describe(pretty_params, *args) do
             pairs.each do |name, val|
               let(name) { val }
