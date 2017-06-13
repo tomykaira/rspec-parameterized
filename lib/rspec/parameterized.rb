@@ -54,6 +54,8 @@ module RSpec
           set_parameters(arg_names) {
             arg_values
           }
+        elsif args.size == 0
+          set_verbose_parameters(&b)
         else
           set_parameters(args, &b)
         end
@@ -142,6 +144,23 @@ module RSpec
         rescue Parser::SyntaxError
           return obj.inspect
         end
+      end
+
+      def set_verbose_parameters(&block)
+        arguments_hash = yield
+        arg_names = arguments_hash.values.reduce(Set.new) { |memo, pairs| memo | pairs.keys }.to_a
+        arg_values = []
+        arguments_hash.each do |name, values_hash|
+          row = [name]
+          arg_names.each do |argument_name|
+              row << values_hash[argument_name]
+          end
+          arg_values << row
+        end
+        arg_names.unshift(:case_name)
+        set_parameters(arg_names) {
+          arg_values
+        }
       end
     end
   end
