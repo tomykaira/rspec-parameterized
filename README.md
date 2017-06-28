@@ -124,6 +124,7 @@ describe "Custom names for regular syntax" do
   with_them do
     it "should do additions" do
       expect(a + b).to eq answer
+    end
   end
 end
 
