@@ -1,12 +1,13 @@
-require 'binding_of_caller'
 require 'rspec/parameterized/table'
+require 'binding_ninja'
 
 module RSpec
   module Parameterized
     module TableSyntaxImplement
-      def |(other)
-        where_binding = binding.of_caller(1)          # get where block binding
-        caller_instance = eval("self", where_binding) # get caller instance (ExampleGroup)
+      extend BindingNinja
+
+      def |(where_binding, other)
+        caller_instance = where_binding.receiver # get caller instance (ExampleGroup)
 
         if caller_instance.instance_variable_defined?(:@__parameter_table)
           table = caller_instance.instance_variable_get(:@__parameter_table)
@@ -20,6 +21,7 @@ module RSpec
         row.add_param(other)
         table
       end
+      auto_inject_binding :|
     end
 
     module TableSyntax
