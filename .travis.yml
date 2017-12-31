@@ -13,6 +13,9 @@ gemfile:
   - gemfiles/rspec3.3.gemfile
   - gemfiles/rspec3.4.gemfile
 
+before_install:
+  - gem update --system --no-document
+
 matrix:
   allow_failures:
     - rvm: ruby-head
