@@ -5,12 +5,16 @@ rvm:
   - 2.2
   - 2.3.0
   - 2.4.0
+  - 2.5.0
   - ruby-head
 
 gemfile:
   - gemfiles/rspec2.gemfile
   - gemfiles/rspec3.3.gemfile
   - gemfiles/rspec3.4.gemfile
+
+before_install:
+  - gem update --system --no-document
 
 matrix:
   allow_failures:
