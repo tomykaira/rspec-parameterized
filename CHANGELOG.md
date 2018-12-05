@@ -1,4 +1,13 @@
 # Change Log
+## Unreleased
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.1...master)
+
+## [v0.4.1](https://github.com/tomykaira/rspec-parameterized/tree/v0.4.1) (2018-12-06)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.0...v0.4.1)
+
+- Replace binding_of_caller with binding_ninja
+  - https://github.com/tomykaira/rspec-parameterized/pull/44
+  - https://github.com/tomykaira/rspec-parameterized/issues/48
 
 ## [v0.4.0](https://github.com/tomykaira/rspec-parameterized/tree/v0.4.0) (2017-06-13)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.3.2...v0.4.0)
