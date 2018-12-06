@@ -13,7 +13,11 @@ I was inspired by [udzura's mock](https://gist.github.com/1881139).}
   gem.add_dependency('parser')
   gem.add_dependency('unparser')
   gem.add_dependency('proc_to_ast')
-  gem.add_dependency('binding_ninja', '>= 0.2.1')
+  if RUBY_PLATFORM == "java"
+    gem.add_dependency('binding_of_caller', '>= 0.8.0')
+  else
+    gem.add_dependency('binding_ninja', '>= 0.2.1')
+  end
   gem.add_development_dependency('rake', '< 12.0.0')
 
   gem.files         = `git ls-files`.split($\)
