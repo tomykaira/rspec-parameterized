@@ -1,5 +1,9 @@
 require 'rspec/parameterized/table'
-require 'binding_ninja'
+if RUBY_PLATFORM == "java"
+  require 'binding_of_caller'
+else
+  require 'binding_ninja'
+end
 
 module RSpec
   module Parameterized
