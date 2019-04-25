@@ -11,9 +11,8 @@ rvm:
   - jruby-9.2.7.0
 
 gemfile:
-  - gemfiles/rspec2.gemfile
-  - gemfiles/rspec3.3.gemfile
   - gemfiles/rspec3.4.gemfile
+  - gemfiles/rspec-head.gemfile
 
 before_install:
   - travis_retry gem update --system || travis_retry gem update --system 2.7.8
