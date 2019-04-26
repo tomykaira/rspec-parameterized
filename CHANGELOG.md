@@ -1,6 +1,13 @@
 # Change Log
 ## Unreleased
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.1...master)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.2...master)
+
+## [v0.4.2](https://github.com/tomykaira/rspec-parameterized/tree/v0.4.2) (2019-04-26)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.1...v0.4.2)
+
+- Support jruby
+  - https://github.com/tomykaira/rspec-parameterized/pull/54
+  - https://github.com/tomykaira/rspec-parameterized/issues/49
 
 ## [v0.4.1](https://github.com/tomykaira/rspec-parameterized/tree/v0.4.1) (2018-12-06)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.0...v0.4.1)
