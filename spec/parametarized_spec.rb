@@ -191,6 +191,52 @@ describe RSpec::Parameterized do
 
   end
 
+  describe "ref" do
+    let(:foo) { 1 }
+
+    where(:value, :answer) do
+      [
+        [ref(:foo), 1],
+      ]
+    end
+
+    with_them do
+      it "let variable in same example group can be used" do
+        expect(value).to eq answer
+      end
+
+      context "override let varibale" do
+        let(:foo) { 3 }
+
+        it "can override let variable" do
+          expect(value).to eq 3
+        end
+      end
+    end
+  end
+
+  describe "lazy" do
+    let(:one) { 1 }
+    let(:four) { 4 }
+
+    where(:a, :b, :answer) do
+      [
+        [ref(:one), ref(:four), lazy { two + three }],
+      ]
+    end
+
+    with_them do
+      context "define two and three after where block" do
+        let(:two) { 2 }
+        let(:three) { 3 }
+
+        it "should do additions" do
+          expect(a + b).to eq answer
+        end
+      end
+    end
+  end
+
   if RUBY_VERSION >= "2.1"
     describe "table separated with pipe (using TableSyntax)" do
       using RSpec::Parameterized::TableSyntax
