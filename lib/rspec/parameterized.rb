@@ -2,6 +2,7 @@ require "rspec/parameterized/version"
 require 'parser'
 require 'unparser'
 require 'proc_to_ast'
+require 'rspec/parameterized/helper_methods'
 
 module RSpec
   module Parameterized
@@ -97,6 +98,7 @@ module RSpec
 
       def define_cases(parameter, *args, &block)
         instance = new  # for evaluate let methods.
+        instance.extend HelperMethods
         if defined?(self.superclass::LetDefinitions)
           instance.extend self.superclass::LetDefinitions
         end
@@ -112,7 +114,11 @@ module RSpec
           pretty_params = pairs.has_key?(:case_name) ? pairs[:case_name] : pairs.map {|name, val| "#{name}: #{params_inspect(val)}"}.join(", ")
           describe(pretty_params, *args) do
             pairs.each do |name, val|
-              let(name) { val }
+              if HelperMethods.applicable? val
+                let(name) { val.apply(self) }
+              else
+                let(name) { val }
+              end
             end
 
             singleton_class.module_eval do
