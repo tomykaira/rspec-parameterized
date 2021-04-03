@@ -105,7 +105,7 @@ end
 
 # It's also possible to override each combination name using magic variable :case_name
 # Output:
-# Custom test case name
+# Custom names for regular syntax
 #   positive integers
 #     should do additions
 #   negative integers
@@ -130,7 +130,7 @@ end
 
 # Or :case_names lambda for hash syntax
 # Output:
-# when hash arguments
+# Custom naming for hash syntax
 #   1 + 5 + 2
 #     sum is even
 #   1 + 5 + 4
