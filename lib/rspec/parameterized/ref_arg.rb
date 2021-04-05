@@ -9,6 +9,10 @@ module RSpec
       def apply(obj)
         obj.send(@symbol)
       end
+
+      def inspect
+        "#{@symbol}"
+      end
     end
   end
 end
