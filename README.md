@@ -148,6 +148,31 @@ describe "Custom naming for hash syntax" do
   end
 end
 
+# Use ref(:symbol) to use let/let! defined variables in the where block
+# Use lazy when you want to create let/let! variables after the where block
+#
+# Failures will be more readable in the future - https://github.com/tomykaira/rspec-parameterized/pull/65
+describe "lazy and ref types" do
+  let(:one) { 1 }
+  let(:four) { 4 }
+
+  where(:a, :b, :result) do
+    [
+      [ref(:one), ref(:four), lazy { two + three }]
+    ]
+  end
+
+  with_them do
+    context "use let after where block" do
+      let(:two) { 2 }
+      let(:three) { 3 }
+
+      it 'should equal 5' do
+        expect(a + b).to eq result
+      end
+    end
+  end
+end
 ```
 
 I was inspired by [udzura's mock](https://gist.github.com/1881139).
