@@ -2,7 +2,7 @@
 ## Unreleased
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.2...master)
 
-## [v0.5.0](https://github.com/tomykaira/rspec-parameterized/tree/v0.4.2) (2019-04-26)
+## [v0.5.0](https://github.com/tomykaira/rspec-parameterized/tree/v0.4.2) (2021-06-29)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.2...v0.5.0)
 
 - Support new parameter type: ref and lazy
