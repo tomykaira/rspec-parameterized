@@ -177,6 +177,10 @@ end
 
 I was inspired by [udzura's mock](https://gist.github.com/1881139).
 
+## Support Versions
+
+Ruby-2.6.0 or later.
+
 ## Installation
 
 Add this line to your application's Gemfile:
