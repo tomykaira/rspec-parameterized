@@ -3,6 +3,7 @@ require 'parser'
 require 'unparser'
 require 'proc_to_ast'
 require 'rspec/parameterized/helper_methods'
+require 'rspec/parameterized/example_helper_methods'
 
 module RSpec
   module Parameterized
@@ -113,12 +114,10 @@ module RSpec
           pairs = [parameter.arg_names, param_set].transpose.to_h
           pretty_params = pairs.has_key?(:case_name) ? pairs[:case_name] : pairs.map {|name, val| "#{name}: #{params_inspect(val)}"}.join(", ")
           describe(pretty_params, *args) do
+            include ExampleHelperMethods
+
             pairs.each do |name, val|
-              if HelperMethods.applicable? val
-                let(name) { val.apply(self) }
-              else
-                let(name) { val }
-              end
+              let(name) { recursive_apply(val) }
             end
 
             singleton_class.module_eval do

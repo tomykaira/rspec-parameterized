@@ -192,46 +192,96 @@ describe RSpec::Parameterized do
   end
 
   describe "ref" do
-    let(:foo) { 1 }
+    context 'simple usecase' do
+      let(:foo) { 1 }
 
-    where(:value, :answer) do
-      [
-        [ref(:foo), 1],
-      ]
-    end
-
-    with_them do
-      it "let variable in same example group can be used" do
-        expect(value).to eq answer
+      where(:value, :answer) do
+        [
+          [ref(:foo), 1],
+        ]
       end
 
-      context "override let varibale" do
-        let(:foo) { 3 }
+      with_them do
+        it "let variable in same example group can be used" do
+          expect(value).to eq answer
+        end
 
-        it "can override let variable" do
-          expect(value).to eq 3
+        context "override let varibale" do
+          let(:foo) { 3 }
+
+          it "can override let variable" do
+            expect(value).to eq 3
+          end
+        end
+      end
+    end
+
+    context "recursive usecase" do
+      let(:foo) { 1 }
+
+      where(:value, :answer) do
+        [
+          [[ref(:foo), 2], [1, 2]],
+        ]
+      end
+
+      with_them do
+        it "let variable in same example group can be used" do
+          expect(value).to eq answer
+        end
+
+        context "override let varibale" do
+          let(:foo) { 3 }
+
+          it "can override let variable" do
+            expect(value).to eq [3, 2]
+          end
         end
       end
     end
   end
 
   describe "lazy" do
-    let(:one) { 1 }
-    let(:four) { 4 }
+    context "simple usecase" do
+      let(:one) { 1 }
+      let(:four) { 4 }
 
-    where(:a, :b, :answer) do
-      [
-        [ref(:one), ref(:four), lazy { two + three }],
-      ]
+      where(:a, :b, :answer) do
+        [
+          [ref(:one), ref(:four), lazy { two + three }],
+        ]
+      end
+
+      with_them do
+        context "define two and three after where block" do
+          let(:two) { 2 }
+          let(:three) { 3 }
+
+          it "should do additions" do
+            expect(a + b).to eq answer
+          end
+        end
+      end
     end
 
-    with_them do
-      context "define two and three after where block" do
-        let(:two) { 2 }
-        let(:three) { 3 }
+    context 'recursive usecase' do
+      let(:one) { 1 }
+      let(:four) { 4 }
 
-        it "should do additions" do
-          expect(a + b).to eq answer
+      where(:a, :b, :answer) do
+        [
+          [ref(:one), ref(:four), { result: lazy { two + three } }],
+        ]
+      end
+
+      with_them do
+        context "define two and three after where block" do
+          let(:two) { 2 }
+          let(:three) { 3 }
+
+          it "should do additions" do
+            expect(a + b).to eq answer[:result]
+          end
         end
       end
     end
