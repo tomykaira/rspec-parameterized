@@ -1,8 +1,14 @@
 # Change Log
 ## Unreleased
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.2...master)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.1...master)
 
-## [v0.5.0](https://github.com/tomykaira/rspec-parameterized/tree/v0.4.2) (2021-06-29)
+## [v0.5.1](https://github.com/tomykaira/rspec-parameterized/tree/v0.5.1) (2022-01-04)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.0...v0.5.1)
+
+- Changes to apply method calls recursively when parameter is Array or Hash.
+  - https://github.com/tomykaira/rspec-parameterized/pull/75
+
+## [v0.5.0](https://github.com/tomykaira/rspec-parameterized/tree/v0.5.0) (2021-06-29)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.4.2...v0.5.0)
 
 - Support new parameter type: ref and lazy
