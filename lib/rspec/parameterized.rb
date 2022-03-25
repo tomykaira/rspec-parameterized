@@ -77,6 +77,7 @@ module RSpec
         opts = args.last.is_a?(Hash) ? args.pop : {}
         opts[:caller] = caller unless opts[:caller]
         args.push(opts)
+        @parameter ||= nil
 
         if @parameter.nil?
           @parameterized_pending_cases ||= []
