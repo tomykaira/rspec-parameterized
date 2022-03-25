@@ -90,12 +90,11 @@ module RSpec
       private
       def set_parameters(arg_names, &b)
         @parameter = Parameter.new(arg_names, &b)
+        @parameterized_pending_cases ||= []
 
-        if @parameterized_pending_cases
-          @parameterized_pending_cases.each { |e|
-            define_cases(@parameter, *e[0], &e[1])
-          }
-        end
+        @parameterized_pending_cases.each { |e|
+          define_cases(@parameter, *e[0], &e[1])
+        }
       end
 
       def define_cases(parameter, *args, &block)
