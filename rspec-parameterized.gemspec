@@ -9,6 +9,8 @@ Gem::Specification.new do |gem|
 I was inspired by [udzura's mock](https://gist.github.com/1881139).}
   gem.homepage      = "https://github.com/tomykaira/rspec-parameterized"
 
+  gem.metadata["rubygems_mfa_required"] = "true"
+
   gem.add_dependency('rspec', '>= 2.13', '< 4')
   gem.add_dependency('parser')
   gem.add_dependency('unparser')
