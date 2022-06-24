@@ -1,6 +1,12 @@
 # Change Log
 ## Unreleased
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.1...master)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.2...master)
+
+## [v0.5.2](https://github.com/tomykaira/rspec-parameterized/tree/v0.5.2) (2022-06-24)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.1...v0.5.2)
+
+- Made MFA mandatory for gem releases
+  - https://github.com/tomykaira/rspec-parameterized/pull/79
 
 ## [v0.5.1](https://github.com/tomykaira/rspec-parameterized/tree/v0.5.1) (2022-01-04)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.0...v0.5.1)
