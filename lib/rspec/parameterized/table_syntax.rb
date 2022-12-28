@@ -1,13 +1,12 @@
 require 'rspec/parameterized/table'
-require 'binding_ninja'
+require 'binding_of_caller'
 
 module RSpec
   module Parameterized
     module TableSyntaxImplement
-      extend BindingNinja
-
-      def |(where_binding, other)
-        caller_instance = where_binding.receiver # get caller instance (ExampleGroup)
+      def |(other)
+        where_binding = binding.of_caller(1)          # get where block binding
+        caller_instance = eval("self", where_binding) # get caller instance (ExampleGroup)
 
         if caller_instance.instance_variable_defined?(:@__parameter_table)
           table = caller_instance.instance_variable_get(:@__parameter_table)
@@ -21,42 +20,57 @@ module RSpec
         row.add_param(other)
         table
       end
-      auto_inject_binding :|
     end
 
     module TableSyntax
-      refine Object do
-        include TableSyntaxImplement
-      end
+      if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create("3.2.0.rc1")
+        refine Object do
+          import_methods TableSyntaxImplement
+        end
 
-      if Gem::Version.create(RUBY_VERSION) >= Gem::Version.create("2.4.0")
+        refine Integer do
+          import_methods TableSyntaxImplement
+        end
+
+        refine Array do
+          import_methods TableSyntaxImplement
+        end
+
+        refine NilClass do
+          import_methods TableSyntaxImplement
+        end
+
+        refine TrueClass do
+          import_methods TableSyntaxImplement
+        end
+
+        refine FalseClass do
+          import_methods TableSyntaxImplement
+        end
+      else
+        refine Object do
+          include TableSyntaxImplement
+        end
+
         refine Integer do
           include TableSyntaxImplement
         end
-      else
-        refine Fixnum do
+
+        refine Array do
           include TableSyntaxImplement
         end
 
-        refine Bignum do
+        refine NilClass do
           include TableSyntaxImplement
         end
-      end
 
-      refine Array do
-        include TableSyntaxImplement
-      end
+        refine TrueClass do
+          include TableSyntaxImplement
+        end
 
-      refine NilClass do
-        include TableSyntaxImplement
-      end
-
-      refine TrueClass do
-        include TableSyntaxImplement
-      end
-
-      refine FalseClass do
-        include TableSyntaxImplement
+        refine FalseClass do
+          include TableSyntaxImplement
+        end
       end
     end
   end
