@@ -1,6 +1,15 @@
 # Change Log
 ## Unreleased
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.2...master)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.3...master)
+
+## [v0.5.3](https://github.com/tomykaira/rspec-parameterized/tree/v0.5.3) (2022-12-29)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.2...v0.5.3)
+
+- Fix uninitialized instance variable warning
+  - https://github.com/tomykaira/rspec-parameterized/pull/78
+- Support Ruby 3.2
+  - https://github.com/tomykaira/rspec-parameterized/pull/81
+  - https://github.com/tomykaira/rspec-parameterized/issues/80
 
 ## [v0.5.2](https://github.com/tomykaira/rspec-parameterized/tree/v0.5.2) (2022-06-24)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.1...v0.5.2)
