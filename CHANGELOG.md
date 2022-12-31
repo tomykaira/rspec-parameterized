@@ -1,6 +1,9 @@
 # Change Log
 ## Unreleased
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.3...master)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.0...master)
+
+## [v1.0.0](https://github.com/tomykaira/rspec-parameterized/tree/v1.0.0) (2022-12-31)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.3...v1.0.0)
 
 - Split gems
   - https://github.com/tomykaira/rspec-parameterized/issues/82
