@@ -182,18 +182,11 @@ I was inspired by [udzura's mock](https://gist.github.com/1881139).
 Ruby-2.6.0 or later.
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'rspec-parameterized'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install rspec-parameterized
+```ruby
+group :test do
+  gem "rspec-parameterized", ">= 1.0.0"
+end
+```
 
 ## Usage
 
@@ -212,3 +205,8 @@ Arguments given to `with_them` is directly passed to `describe`.  You can specif
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Also see
+
+* https://github.com/rspec-parameterized/rspec-parameterized-table_syntax
+* https://github.com/rspec-parameterized/rspec-parameterized-core

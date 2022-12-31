@@ -1,5 +1,5 @@
 module RSpec
   module Parameterized
-    VERSION = "0.5.3"
+    VERSION = "1.0.0.rc1"
   end
 end

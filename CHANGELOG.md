@@ -2,6 +2,16 @@
 ## Unreleased
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.3...master)
 
+- Split gems
+  - https://github.com/tomykaira/rspec-parameterized/issues/82
+  - https://github.com/tomykaira/rspec-parameterized/pull/83
+
+See also
+
+- [Upgrading Guide](UPGRADING.md#v10)
+- https://github.com/rspec-parameterized/rspec-parameterized-table_syntax/blob/main/CHANGELOG.md#100---2022-12-31
+- https://github.com/rspec-parameterized/rspec-parameterized-core/blob/main/CHANGELOG.md#100---2022-12-31
+
 ## [v0.5.3](https://github.com/tomykaira/rspec-parameterized/tree/v0.5.3) (2022-12-29)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.2...v0.5.3)
 
