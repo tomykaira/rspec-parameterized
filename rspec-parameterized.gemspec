@@ -11,11 +11,9 @@ I was inspired by [udzura's mock](https://gist.github.com/1881139).}
 
   gem.metadata["rubygems_mfa_required"] = "true"
 
-  gem.add_dependency('rspec', '>= 2.13', '< 4')
-  gem.add_dependency('parser')
-  gem.add_dependency('unparser')
-  gem.add_dependency('proc_to_ast')
-  gem.add_dependency('binding_of_caller')
+  gem.add_dependency('rspec-parameterized-core', '< 2')
+  gem.add_dependency('rspec-parameterized-table_syntax', '< 2')
+
   gem.add_development_dependency('rake', '>= 12.0.0')
 
   gem.files         = `git ls-files`.split($\)
