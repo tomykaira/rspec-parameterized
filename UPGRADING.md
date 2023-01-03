@@ -3,7 +3,7 @@ Moved all implements to https://github.com/rspec-parameterized/rspec-parameteriz
 
 For v0.x users, there is basically no need to do anything other than `bundle update`.
 
-If you are not using `RSpec::Parameterized::TableSyntax`, you can write `rspec-parameterized-core` instead of `rspec-parameterized` in your `Gemfile` to reduce the dependency.
+If you are not using `RSpec::Parameterized::TableSyntax`, you can write `rspec-parameterized-core` instead of `rspec-parameterized` in your `Gemfile` to reduce the dependency. (`rspec-parameterized-table_syntax` includes dependency on native extension...)
 
 e.g.
 
