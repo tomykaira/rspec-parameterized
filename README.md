@@ -117,7 +117,7 @@ describe "Custom names for regular syntax" do
     [
       ["positive integers",  6,  2,  8],
       ["negative integers", -1, -2, -3],
-      [   "mixed integers", -5,  3, -2],
+      ["mixed integers", -5,  3, -2],
     ]
   end
 
