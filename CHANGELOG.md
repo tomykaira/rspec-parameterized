@@ -1,6 +1,12 @@
 # Change Log
 ## Unreleased
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.0...master)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.1...master)
+
+## [v1.0.1](https://github.com/tomykaira/rspec-parameterized/tree/v1.0.1) (2024-04-28)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.0...v1.0.1)
+
+- Reference LICENSE file in .gemspec
+  - https://github.com/tomykaira/rspec-parameterized/pull/87
 
 ## [v1.0.0](https://github.com/tomykaira/rspec-parameterized/tree/v1.0.0) (2022-12-31)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v0.5.3...v1.0.0)
