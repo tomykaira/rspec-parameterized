@@ -1,6 +1,12 @@
 # Change Log
 ## Unreleased
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.1...master)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.2...master)
+
+## [v1.0.2](https://github.com/tomykaira/rspec-parameterized/tree/v1.0.1) (2024-04-28)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.1...v1.0.2)
+
+- Hard-code the license name
+  - https://github.com/tomykaira/rspec-parameterized/pull/88
 
 ## [v1.0.1](https://github.com/tomykaira/rspec-parameterized/tree/v1.0.1) (2024-04-28)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.0...v1.0.1)
