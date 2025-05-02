@@ -1,6 +1,21 @@
 # Change Log
 ## Unreleased
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.2...master)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v2.0.0...master)
+
+## [v2.0.0](https://github.com/tomykaira/rspec-parameterized/releases/tag/v2.0.0) (2025-05-02)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.2...v2.0.0)
+
+- Requires rspec-parameterized-core v2 and rspec-parameterized-table_syntax v2
+  - https://github.com/tomykaira/rspec-parameterized/pull/90
+
+see also
+
+- rspec-parameterized-core
+  - https://github.com/rspec-parameterized/rspec-parameterized-core/blob/main/CHANGELOG.md#200---2025-05-02
+  - https://github.com/rspec-parameterized/rspec-parameterized-core/releases/tag/v2.0.0
+- rspec-parameterized-table_syntax
+  - https://github.com/rspec-parameterized/rspec-parameterized-table_syntax/blob/main/CHANGELOG.md#200---2025-05-02
+  - https://github.com/rspec-parameterized/rspec-parameterized-table_syntax/releases/tag/v2.0.0
 
 ## [v1.0.2](https://github.com/tomykaira/rspec-parameterized/tree/v1.0.1) (2024-04-28)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.1...v1.0.2)
