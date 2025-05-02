@@ -12,8 +12,8 @@ I was inspired by [udzura's mock](https://gist.github.com/1881139).}
   gem.metadata["rubygems_mfa_required"] = "true"
   gem.license       = "MIT"
 
-  gem.add_dependency('rspec-parameterized-core', '< 2')
-  gem.add_dependency('rspec-parameterized-table_syntax', '< 2')
+  gem.add_dependency('rspec-parameterized-core', '>= 2', '< 3')
+  gem.add_dependency('rspec-parameterized-table_syntax', '>= 2', '< 3')
 
   gem.add_development_dependency('rake', '>= 12.0.0')
 
