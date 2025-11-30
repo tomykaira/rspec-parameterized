@@ -1,6 +1,12 @@
 # Change Log
 ## Unreleased
-[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v2.0.0...master)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v2.0.1...master)
+
+## [v2.0.1](https://github.com/tomykaira/rspec-parameterized/releases/tag/v2.0.1) (2025-11-30)
+[Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v2.0.0...v2.0.1)
+
+- Release gem from GitHub Actions
+  - https://github.com/tomykaira/rspec-parameterized/pull/93
 
 ## [v2.0.0](https://github.com/tomykaira/rspec-parameterized/releases/tag/v2.0.0) (2025-05-02)
 [Full Changelog](https://github.com/tomykaira/rspec-parameterized/compare/v1.0.2...v2.0.0)
