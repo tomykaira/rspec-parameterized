@@ -10,3 +10,5 @@ updates:
       timezone: Asia/Tokyo
     cooldown:
       default-days: 7
+    assignees:
+      - sue445
