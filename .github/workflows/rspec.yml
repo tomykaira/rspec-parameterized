@@ -31,3 +31,17 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Run tests
         run: bundle exec rake
+
+  all-pass:
+    if: always()
+
+    needs:
+      - test
+
+    runs-on: ubuntu-slim
+
+    steps:
+      - name: check dependent jobs
+        uses: re-actors/alls-green@v1.2.2
+        with:
+          jobs: ${{ toJSON(needs) }}
